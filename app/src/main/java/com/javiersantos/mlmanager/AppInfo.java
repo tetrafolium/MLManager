@@ -13,7 +13,7 @@ public class AppInfo implements Serializable {
     private Drawable icon;
     private Boolean system;
 
-    public AppInfo(String name, String apk, String version, String source, String data, Drawable icon, Boolean isSystem) {
+    public AppInfo(final String name, final String apk, final String version, final String source, final String data, final Drawable icon, final Boolean isSystem) {
         this.name = name;
         this.apk = apk;
         this.version = version;
@@ -23,7 +23,7 @@ public class AppInfo implements Serializable {
         this.system = isSystem;
     }
 
-    public AppInfo(String string) {
+    public AppInfo(final String string) {
         String[] split = string.split("##");
         if (split.length == 6) {
             this.name = split[0];
@@ -59,7 +59,7 @@ public class AppInfo implements Serializable {
         return icon;
     }
 
-    public void setIcon(Drawable icon) {
+    public void setIcon(final Drawable icon) {
         this.icon = icon;
     }
 

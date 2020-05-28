@@ -23,7 +23,7 @@ import java.io.File;
 
 public class UtilsDialog {
 
-    public static MaterialDialog showTitleContent(Context context, String title, String content) {
+    public static MaterialDialog showTitleContent(final Context context, final String title, final String content) {
         MaterialDialog.Builder materialBuilder = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
@@ -32,7 +32,7 @@ public class UtilsDialog {
         return materialBuilder.show();
     }
 
-    public static MaterialDialog showTitleContentWithProgress(Context context, String title, String content) {
+    public static MaterialDialog showTitleContentWithProgress(final Context context, final String title, final String content) {
         MaterialDialog.Builder materialBuilder = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
@@ -41,7 +41,7 @@ public class UtilsDialog {
         return materialBuilder.show();
     }
 
-    public static MaterialDialog.Builder showUninstall(Context context) {
+    public static MaterialDialog.Builder showUninstall(final Context context) {
         return new MaterialDialog.Builder(context)
                 .title(context.getResources().getString(R.string.dialog_uninstall_root))
                 .content(context.getResources().getString(R.string.dialog_uninstall_root_description))
@@ -50,7 +50,7 @@ public class UtilsDialog {
                 .cancelable(false);
     }
 
-    public static MaterialDialog.Builder showUninstalled(Context context, AppInfo appInfo) {
+    public static MaterialDialog.Builder showUninstalled(final Context context, final AppInfo appInfo) {
         return new MaterialDialog.Builder(context)
                 .title(String.format(context.getResources().getString(R.string.dialog_uninstalled_root), appInfo.getName()))
                 .content(context.getResources().getString(R.string.dialog_uninstalled_root_description))
@@ -68,14 +68,14 @@ public class UtilsDialog {
      * @param style 1 for extracted APKs, 2 display without button and 3 for hidden apps
      * @return Snackbar to show
      */
-    public static SnackBar showSnackbar(Activity activity, String text, @Nullable String buttonText, @Nullable final File file, Integer style) {
+    public static SnackBar showSnackbar(final Activity activity, final String text, final @Nullable String buttonText, @Nullable final File file, final Integer style) {
         SnackBar snackBar;
 
         switch (style) {
             case 1:
                 snackBar = new SnackBar(activity, text, buttonText, new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(final View view) {
                         file.delete();
                     }
                 });
@@ -86,7 +86,7 @@ public class UtilsDialog {
             case 3:
                 snackBar = new SnackBar(activity, text, buttonText, new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(final View view) {
                         UtilsRoot.rebootSystem();
                     }
                 });
@@ -127,13 +127,13 @@ public class UtilsDialog {
                 .icon(ContextCompat.getDrawable(context, R.mipmap.ic_launcher_pro))
                 .adapter(adapter, new MaterialDialog.ListCallback() {
                     @Override
-                    public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {}
+                    public void onSelection(final MaterialDialog materialDialog, final View view, final int i, final CharSequence charSequence) { }
                 })
                 .positiveText(context.getResources().getString(R.string.action_buy) + " ($1.43)")
                 .negativeText(context.getResources().getString(R.string.button_later))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(final @NonNull MaterialDialog dialog, final @NonNull DialogAction which) {
                         UtilsApp.goToGooglePlay(context, MLManagerApplication.getProPackage());
                     }
                 });

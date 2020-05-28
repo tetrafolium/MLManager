@@ -19,7 +19,7 @@ public class UninstallInBackground extends AsyncTask<Void, String, Boolean> {
     private MaterialDialog dialog;
     private AppInfo appInfo;
 
-    public UninstallInBackground(Context context, MaterialDialog dialog, AppInfo appInfo) {
+    public UninstallInBackground(final Context context, final MaterialDialog dialog, final AppInfo appInfo) {
         this.context = context;
         this.activity = (Activity) context;
         this.dialog = dialog;
@@ -27,7 +27,7 @@ public class UninstallInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... voids) {
+    protected Boolean doInBackground(final Void... voids) {
         Boolean status = false;
 
         if (UtilsApp.checkPermissions(activity)) {
@@ -38,21 +38,21 @@ public class UninstallInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean status) {
+    protected void onPostExecute(final Boolean status) {
         super.onPostExecute(status);
         dialog.dismiss();
         if (status) {
             MaterialDialog.Builder materialDialog = UtilsDialog.showUninstalled(context, appInfo);
                     materialDialog.callback(new MaterialDialog.ButtonCallback() {
                         @Override
-                        public void onPositive(MaterialDialog dialog) {
+                        public void onPositive(final MaterialDialog dialog) {
                             UtilsRoot.rebootSystem();
                             dialog.dismiss();
                         }
                     });
                     materialDialog.callback(new MaterialDialog.ButtonCallback() {
                         @Override
-                        public void onNegative(MaterialDialog dialog) {
+                        public void onNegative(final MaterialDialog dialog) {
                             dialog.dismiss();
                             Intent intent = new Intent(context, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

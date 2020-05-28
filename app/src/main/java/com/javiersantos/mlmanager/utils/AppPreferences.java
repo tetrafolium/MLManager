@@ -27,7 +27,7 @@ public class AppPreferences {
     public static final String KeyFavoriteApps = "prefFavoriteApps";
     public static final String KeyHiddenApps = "prefHiddenApps";
 
-    public AppPreferences(Context context) {
+    public AppPreferences(final Context context) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.editor = sharedPreferences.edit();
         this.context = context;
@@ -37,7 +37,7 @@ public class AppPreferences {
         return sharedPreferences.getInt(KeyIsRooted, 0);
     }
 
-    public void setRootStatus(int rootStatus) {
+    public void setRootStatus(final int rootStatus) {
         editor.putInt(KeyIsRooted, rootStatus);
         editor.commit();
     }
@@ -45,7 +45,7 @@ public class AppPreferences {
     public int getPrimaryColorPref() {
         return sharedPreferences.getInt(KeyPrimaryColor, context.getResources().getColor(R.color.primary));
     }
-    public void setPrimaryColorPref(Integer res) {
+    public void setPrimaryColorPref(final Integer res) {
         editor.putInt(KeyPrimaryColor, res);
         editor.commit();
     }
@@ -53,7 +53,7 @@ public class AppPreferences {
     public int getFABColorPref() {
         return sharedPreferences.getInt(KeyFABColor, context.getResources().getColor(R.color.fab));
     }
-    public void setFABColorPref(Integer res) {
+    public void setFABColorPref(final Integer res) {
         editor.putInt(KeyFABColor, res);
         editor.commit();
     }
@@ -61,7 +61,7 @@ public class AppPreferences {
     public Boolean getNavigationBlackPref() {
         return sharedPreferences.getBoolean(KeyNavigationBlack, false);
     }
-    public void setNavigationBlackPref(Boolean res) {
+    public void setNavigationBlackPref(final Boolean res) {
         editor.putBoolean(KeyNavigationBlack, res);
         editor.commit();
     }
@@ -69,7 +69,7 @@ public class AppPreferences {
     public Boolean getFABShowPref() {
         return sharedPreferences.getBoolean(KeyFABShow, false);
     }
-    public void setFABShowPref(Boolean res) {
+    public void setFABShowPref(final Boolean res) {
         editor.putBoolean(KeyFABShow, res);
         editor.commit();
     }
@@ -77,7 +77,7 @@ public class AppPreferences {
     public String getCustomFilename() {
         return sharedPreferences.getString(KeyCustomFilename, "1");
     }
-    public void setCustomFilename(String res) {
+    public void setCustomFilename(final String res) {
         editor.putString(KeyCustomFilename, res);
         editor.commit();
     }
@@ -85,7 +85,7 @@ public class AppPreferences {
     public String getSortMode() {
         return sharedPreferences.getString(KeySortMode, "1");
     }
-    public void setSortMode(String res) {
+    public void setSortMode(final String res) {
         editor.putString(KeySortMode, res);
         editor.commit();
     }
@@ -94,7 +94,7 @@ public class AppPreferences {
         return sharedPreferences.getString(KeyCustomPath, UtilsApp.getDefaultAppFolder().getPath());
     }
 
-    public void setCustomPath(String path) {
+    public void setCustomPath(final String path) {
         editor.putString(KeyCustomPath, path);
         editor.commit();
     }
@@ -103,7 +103,7 @@ public class AppPreferences {
         return sharedPreferences.getStringSet(KeyFavoriteApps, new HashSet<String>());
     }
 
-    public void setFavoriteApps(Set<String> favoriteApps) {
+    public void setFavoriteApps(final Set<String> favoriteApps) {
         editor.remove(KeyFavoriteApps);
         editor.commit();
         editor.putStringSet(KeyFavoriteApps, favoriteApps);
@@ -114,7 +114,7 @@ public class AppPreferences {
         return sharedPreferences.getStringSet(KeyHiddenApps, new HashSet<String>());
     }
 
-    public void setHiddenApps(Set<String> hiddenApps) {
+    public void setHiddenApps(final Set<String> hiddenApps) {
         editor.remove(KeyHiddenApps);
         editor.commit();
         editor.putStringSet(KeyHiddenApps, hiddenApps);

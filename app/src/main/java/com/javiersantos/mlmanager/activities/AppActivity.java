@@ -58,7 +58,7 @@ public class AppActivity extends AppCompatActivity {
     private FloatingActionsMenu fab;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
         this.context = this;
@@ -74,14 +74,14 @@ public class AppActivity extends AppCompatActivity {
     private void setInitialConfiguration() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null ) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 onBackPressed();
             }
         });
@@ -135,14 +135,14 @@ public class AppActivity extends AppCompatActivity {
         } else {
             googleplay.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     UtilsApp.goToGooglePlay(context, appInfo.getAPK());
                 }
             });
 
             googleplay.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View view) {
+                public boolean onLongClick(final View view) {
                     ClipData clipData;
 
                     ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -156,7 +156,7 @@ public class AppActivity extends AppCompatActivity {
 
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     try {
                         Intent intent = getPackageManager().getLaunchIntentForPackage(appInfo.getAPK());
                         startActivity(intent);
@@ -169,7 +169,7 @@ public class AppActivity extends AppCompatActivity {
 
             uninstall.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     Intent intent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE);
                     intent.setData(Uri.parse("package:" + appInfo.getAPK()));
                     intent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
@@ -179,26 +179,26 @@ public class AppActivity extends AppCompatActivity {
         }
         extract.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                        , String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
-                        , getResources().getString(R.string.dialog_saving_description));
+, String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
+, getResources().getString(R.string.dialog_saving_description));
                 new ExtractFileInBackground(context, dialog, appInfo).execute();
             }
         });
 
-        if(UtilsRoot.isRooted() && MLManagerApplication.isPro()) {
+        if (UtilsRoot.isRooted() && MLManagerApplication.isPro()) {
             if (appInfo.isSystem()) {
                 uninstall.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(final View view) {
                         MaterialDialog.Builder materialBuilder = UtilsDialog.showUninstall(context)
                                 .callback(new MaterialDialog.ButtonCallback() {
                                     @Override
-                                    public void onPositive(MaterialDialog dialog) {
+                                    public void onPositive(final MaterialDialog dialog) {
                                         MaterialDialog dialogUninstalling = UtilsDialog.showTitleContentWithProgress(context
-                                                , String.format(getResources().getString(R.string.dialog_uninstalling), appInfo.getName())
-                                                , getResources().getString(R.string.dialog_uninstalling_description));
+, String.format(getResources().getString(R.string.dialog_uninstalling), appInfo.getName())
+, getResources().getString(R.string.dialog_uninstalling_description));
                                         new UninstallInBackground(context, dialogUninstalling, appInfo).execute();
                                         dialog.dismiss();
                                     }
@@ -210,23 +210,23 @@ public class AppActivity extends AppCompatActivity {
             cache.setVisibility(View.VISIBLE);
             cache.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_cache_deleting)
-                            , getResources().getString(R.string.dialog_cache_deleting_description));
+, getResources().getString(R.string.dialog_cache_deleting)
+, getResources().getString(R.string.dialog_cache_deleting_description));
                     new DeleteDataInBackground(context, dialog, appInfo.getData() + "/cache/**"
-                            , getResources().getString(R.string.dialog_cache_success_description, appInfo.getName())).execute();
+, getResources().getString(R.string.dialog_cache_success_description, appInfo.getName())).execute();
                 }
             });
             clearData.setVisibility(View.VISIBLE);
             clearData.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_clear_data_deleting)
-                            , getResources().getString(R.string.dialog_clear_data_deleting_description));
+, getResources().getString(R.string.dialog_clear_data_deleting)
+, getResources().getString(R.string.dialog_clear_data_deleting_description));
                     new DeleteDataInBackground(context, dialog, appInfo.getData() + "/**"
-                            , getResources().getString(R.string.dialog_clear_data_success_description, appInfo.getName())).execute();
+, getResources().getString(R.string.dialog_clear_data_success_description, appInfo.getName())).execute();
                 }
             });
         } else if (appInfo.isSystem()) {
@@ -237,7 +237,7 @@ public class AppActivity extends AppCompatActivity {
         // FAB (Share)
         fab_share.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.copyFile(appInfo);
                 Intent shareIntent = UtilsApp.getShareIntent(UtilsApp.getOutputFilename(appInfo));
                 startActivity(Intent.createChooser(shareIntent, String.format(getResources().getString(R.string.send_to), appInfo.getName())));
@@ -252,7 +252,7 @@ public class AppActivity extends AppCompatActivity {
                 fab_hide.setVisibility(View.VISIBLE);
                 fab_hide.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(final View view) {
                         if (UtilsApp.isAppHidden(appInfo, appsHidden)) {
                             Boolean hidden = UtilsRoot.hideWithRootPermission(appInfo.getAPK(), true);
                             if (hidden) {
@@ -278,7 +278,7 @@ public class AppActivity extends AppCompatActivity {
             fab_buy.setTitle(context.getResources().getString(R.string.action_buy));
             fab_buy.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     UtilsDialog.showProFeatures(context);
                 }
             });
@@ -287,7 +287,7 @@ public class AppActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == UNINSTALL_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -329,20 +329,20 @@ public class AppActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_app, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         item_favorite = menu.findItem(R.id.action_favorite);
         UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appsFavorite));
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
                 finish();

@@ -8,7 +8,7 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
     private boolean controlsVisible = true;
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
         if (scrolledDistance > HIDE_THRESHOLD && controlsVisible) {
@@ -21,7 +21,7 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
             scrolledDistance = 0;
         }
 
-        if((controlsVisible && dy>0) || (!controlsVisible && dy<0)) {
+        if ((controlsVisible && dy > 0) || (!controlsVisible && dy < 0)) {
             scrolledDistance += dy;
         }
     }
