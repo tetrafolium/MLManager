@@ -40,11 +40,11 @@
 ![ML Manager](https://raw.githubusercontent.com/javiersantos/MLManager/master/Screenshots/header-basic.png)
 
 ## Creating your ML Manager
-All developers are welcome to use the source code to create derivate applications. There are several things I require from all developers for the moment.
+All developers are welcome to use the source code to create derivative applications. There are several things I require from all developers for the moment.
 
 1. Please do not use the name ML Manager for your app.
 2. Kindly do not use the standard logo as your app's logo.
-3. Please remember to read and follow the [GPL v3 license](https://github.com/javiersantos/MLManager/blob/master/LICENSE). Your derivate work must include this license.
+3. Please remember to read and follow the [GPL v3 license](https://github.com/javiersantos/MLManager/blob/master/LICENSE). Your derivative work must include this license.
 
 I ask that you do not redistribute this application for your own gain though. If you make a build and want to share it with people, that is great, that is what this should be for. Do not charge them for that build though. I have spent months creating this project and this is what I ask if you choose to make it for yourself.
 
