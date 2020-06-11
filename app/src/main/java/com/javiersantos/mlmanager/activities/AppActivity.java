@@ -181,8 +181,8 @@ public class AppActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                        , String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
-                        , getResources().getString(R.string.dialog_saving_description));
+                                        , String.format(getResources().getString(R.string.dialog_saving), appInfo.getName())
+                                        , getResources().getString(R.string.dialog_saving_description));
                 new ExtractFileInBackground(context, dialog, appInfo).execute();
             }
         });
@@ -193,16 +193,16 @@ public class AppActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         MaterialDialog.Builder materialBuilder = UtilsDialog.showUninstall(context)
-                                .callback(new MaterialDialog.ButtonCallback() {
-                                    @Override
-                                    public void onPositive(MaterialDialog dialog) {
-                                        MaterialDialog dialogUninstalling = UtilsDialog.showTitleContentWithProgress(context
-                                                , String.format(getResources().getString(R.string.dialog_uninstalling), appInfo.getName())
-                                                , getResources().getString(R.string.dialog_uninstalling_description));
-                                        new UninstallInBackground(context, dialogUninstalling, appInfo).execute();
-                                        dialog.dismiss();
-                                    }
-                                });
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                MaterialDialog dialogUninstalling = UtilsDialog.showTitleContentWithProgress(context
+                                                                    , String.format(getResources().getString(R.string.dialog_uninstalling), appInfo.getName())
+                                                                    , getResources().getString(R.string.dialog_uninstalling_description));
+                                new UninstallInBackground(context, dialogUninstalling, appInfo).execute();
+                                dialog.dismiss();
+                            }
+                        });
                         materialBuilder.show();
                     }
                 });
@@ -212,10 +212,10 @@ public class AppActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_cache_deleting)
-                            , getResources().getString(R.string.dialog_cache_deleting_description));
+                                            , getResources().getString(R.string.dialog_cache_deleting)
+                                            , getResources().getString(R.string.dialog_cache_deleting_description));
                     new DeleteDataInBackground(context, dialog, appInfo.getData() + "/cache/**"
-                            , getResources().getString(R.string.dialog_cache_success_description, appInfo.getName())).execute();
+                                               , getResources().getString(R.string.dialog_cache_success_description, appInfo.getName())).execute();
                 }
             });
             clearData.setVisibility(View.VISIBLE);
@@ -223,10 +223,10 @@ public class AppActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                            , getResources().getString(R.string.dialog_clear_data_deleting)
-                            , getResources().getString(R.string.dialog_clear_data_deleting_description));
+                                            , getResources().getString(R.string.dialog_clear_data_deleting)
+                                            , getResources().getString(R.string.dialog_clear_data_deleting_description));
                     new DeleteDataInBackground(context, dialog, appInfo.getData() + "/**"
-                            , getResources().getString(R.string.dialog_clear_data_success_description, appInfo.getName())).execute();
+                                               , getResources().getString(R.string.dialog_clear_data_success_description, appInfo.getName())).execute();
                 }
             });
         } else if (appInfo.isSystem()) {
@@ -344,19 +344,19 @@ public class AppActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
-                finish();
-                return true;
-            case R.id.action_favorite:
-                if (UtilsApp.isAppFavorite(appInfo.getAPK(), appsFavorite)) {
-                    appsFavorite.remove(appInfo.getAPK());
-                    appPreferences.setFavoriteApps(appsFavorite);
-                } else {
-                    appsFavorite.add(appInfo.getAPK());
-                    appPreferences.setFavoriteApps(appsFavorite);
-                }
-                UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appsFavorite));
-                return true;
+        case R.id.home:
+            finish();
+            return true;
+        case R.id.action_favorite:
+            if (UtilsApp.isAppFavorite(appInfo.getAPK(), appsFavorite)) {
+                appsFavorite.remove(appInfo.getAPK());
+                appPreferences.setFavoriteApps(appsFavorite);
+            } else {
+                appsFavorite.add(appInfo.getAPK());
+                appPreferences.setFavoriteApps(appsFavorite);
+            }
+            UtilsApp.setAppFavorite(context, item_favorite, UtilsApp.isAppFavorite(appInfo.getAPK(), appsFavorite));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -75,18 +75,18 @@ public class UtilsApp {
         String res;
 
         switch (appPreferences.getCustomFilename()) {
-            case "1":
-                res = appInfo.getAPK() + "_" + appInfo.getVersion();
-                break;
-            case "2":
-                res = appInfo.getName() + "_" + appInfo.getVersion();
-                break;
-            case "4":
-                res = appInfo.getName();
-                break;
-            default:
-                res = appInfo.getAPK();
-                break;
+        case "1":
+            res = appInfo.getAPK() + "_" + appInfo.getVersion();
+            break;
+        case "2":
+            res = appInfo.getName() + "_" + appInfo.getVersion();
+            break;
+        case "4":
+            res = appInfo.getName();
+            break;
+        default:
+            res = appInfo.getAPK();
+            break;
         }
 
         return res;
@@ -193,7 +193,7 @@ public class UtilsApp {
     public static Boolean isAppFavorite(String apk, Set<String> appFavorites) {
         Boolean res = false;
         if (appFavorites.contains(apk)) {
-           res = true;
+            res = true;
         }
 
         return res;
@@ -325,7 +325,7 @@ public class UtilsApp {
     public static Boolean checkPermissions(Activity activity) {
         Boolean res = false;
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            activity.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_READ);
+            activity.requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_READ);
         } else {
             res = true;
         }

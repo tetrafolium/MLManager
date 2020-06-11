@@ -147,50 +147,50 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             totalApps = packages.size() + hiddenApps.size();
             // Get Sort Mode
             switch (appPreferences.getSortMode()) {
-                default:
-                    // Comparator by Name (default)
-                    Collections.sort(packages, new Comparator<PackageInfo>() {
-                        @Override
-                        public int compare(PackageInfo p1, PackageInfo p2) {
-                            return packageManager.getApplicationLabel(p1.applicationInfo).toString().toLowerCase().compareTo(packageManager.getApplicationLabel(p2.applicationInfo).toString().toLowerCase());
-                        }
-                    });
-                    break;
-                case "2":
-                    // Comparator by Size
-                    Collections.sort(packages, new Comparator<PackageInfo>() {
-                        @Override
-                        public int compare(PackageInfo p1, PackageInfo p2) {
-                            Long size1 = new File(p1.applicationInfo.sourceDir).length();
-                            Long size2 = new File(p2.applicationInfo.sourceDir).length();
-                            return size2.compareTo(size1);
-                        }
-                    });
-                    break;
-                case "3":
-                    // Comparator by Installation Date (default)
-                    Collections.sort(packages, new Comparator<PackageInfo>() {
-                        @Override
-                        public int compare(PackageInfo p1, PackageInfo p2) {
-                            return Long.toString(p2.firstInstallTime).compareTo(Long.toString(p1.firstInstallTime));
-                        }
-                    });
-                    break;
-                case "4":
-                    // Comparator by Last Update
-                    Collections.sort(packages, new Comparator<PackageInfo>() {
-                        @Override
-                        public int compare(PackageInfo p1, PackageInfo p2) {
-                            return Long.toString(p2.lastUpdateTime).compareTo(Long.toString(p1.lastUpdateTime));
-                        }
-                    });
-                    break;
+            default:
+                // Comparator by Name (default)
+                Collections.sort(packages, new Comparator<PackageInfo>() {
+                    @Override
+                    public int compare(PackageInfo p1, PackageInfo p2) {
+                        return packageManager.getApplicationLabel(p1.applicationInfo).toString().toLowerCase().compareTo(packageManager.getApplicationLabel(p2.applicationInfo).toString().toLowerCase());
+                    }
+                });
+                break;
+            case "2":
+                // Comparator by Size
+                Collections.sort(packages, new Comparator<PackageInfo>() {
+                    @Override
+                    public int compare(PackageInfo p1, PackageInfo p2) {
+                        Long size1 = new File(p1.applicationInfo.sourceDir).length();
+                        Long size2 = new File(p2.applicationInfo.sourceDir).length();
+                        return size2.compareTo(size1);
+                    }
+                });
+                break;
+            case "3":
+                // Comparator by Installation Date (default)
+                Collections.sort(packages, new Comparator<PackageInfo>() {
+                    @Override
+                    public int compare(PackageInfo p1, PackageInfo p2) {
+                        return Long.toString(p2.firstInstallTime).compareTo(Long.toString(p1.firstInstallTime));
+                    }
+                });
+                break;
+            case "4":
+                // Comparator by Last Update
+                Collections.sort(packages, new Comparator<PackageInfo>() {
+                    @Override
+                    public int compare(PackageInfo p1, PackageInfo p2) {
+                        return Long.toString(p2.lastUpdateTime).compareTo(Long.toString(p1.lastUpdateTime));
+                    }
+                });
+                break;
             }
 
             // Installed & System Apps
             for (PackageInfo packageInfo : packages) {
                 if (!(packageManager.getApplicationLabel(packageInfo.applicationInfo).equals("") || packageInfo.packageName.equals(""))) {
-                    
+
                     if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                         try {
                             // Non System Apps
@@ -359,11 +359,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_WRITE_READ: {
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    UtilsDialog.showTitleContent(context, getResources().getString(R.string.dialog_permissions), getResources().getString(R.string.dialog_permissions_description));
-                }
+        case MY_PERMISSIONS_REQUEST_WRITE_READ: {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                UtilsDialog.showTitleContent(context, getResources().getString(R.string.dialog_permissions), getResources().getString(R.string.dialog_permissions_description));
             }
+        }
         }
     }
 

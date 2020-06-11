@@ -72,9 +72,9 @@ public class UtilsUI {
         }
 
         AccountHeader headerResult = new AccountHeaderBuilder()
-                .withActivity(activity)
-                .withHeaderBackground(header)
-                .build();
+        .withActivity(activity)
+        .withHeaderBackground(header)
+        .build();
 
         Integer badgeColor = ContextCompat.getColor(context, R.color.divider);
         BadgeStyle badgeStyle = new BadgeStyle(badgeColor, badgeColor).withTextColor(Color.GRAY);
@@ -87,54 +87,54 @@ public class UtilsUI {
 
         if (MLManagerApplication.isPro()) {
             drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apps)).withIcon(GoogleMaterial.Icon.gmd_phone_android).withBadge(apps).withBadgeStyle(badgeStyle).withIdentifier(1),
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_system_apps)).withIcon(GoogleMaterial.Icon.gmd_android).withBadge(systemApps).withBadgeStyle(badgeStyle).withIdentifier(2),
-                    new DividerDrawerItem(),
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_favorites)).withIcon(GoogleMaterial.Icon.gmd_star).withBadge(favoriteApps).withBadgeStyle(badgeStyle).withIdentifier(3),
-                    new DividerDrawerItem(),
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_hidden_apps)).withIcon(GoogleMaterial.Icon.gmd_visibility_off).withBadge(hiddenApps).withBadgeStyle(badgeStyle).withIdentifier(4),
-                    new DividerDrawerItem(),
-                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(GoogleMaterial.Icon.gmd_settings).withSelectable(false).withIdentifier(6),
-                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false).withIdentifier(7));
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apps)).withIcon(GoogleMaterial.Icon.gmd_phone_android).withBadge(apps).withBadgeStyle(badgeStyle).withIdentifier(1),
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_system_apps)).withIcon(GoogleMaterial.Icon.gmd_android).withBadge(systemApps).withBadgeStyle(badgeStyle).withIdentifier(2),
+                new DividerDrawerItem(),
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_favorites)).withIcon(GoogleMaterial.Icon.gmd_star).withBadge(favoriteApps).withBadgeStyle(badgeStyle).withIdentifier(3),
+                new DividerDrawerItem(),
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_hidden_apps)).withIcon(GoogleMaterial.Icon.gmd_visibility_off).withBadge(hiddenApps).withBadgeStyle(badgeStyle).withIdentifier(4),
+                new DividerDrawerItem(),
+                new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(GoogleMaterial.Icon.gmd_settings).withSelectable(false).withIdentifier(6),
+                new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false).withIdentifier(7));
         } else {
             drawerBuilder.addDrawerItems(
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apps)).withIcon(GoogleMaterial.Icon.gmd_phone_android).withBadge(apps).withBadgeStyle(badgeStyle).withIdentifier(1),
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_system_apps)).withIcon(GoogleMaterial.Icon.gmd_android).withBadge(systemApps).withBadgeStyle(badgeStyle).withIdentifier(2),
-                    new DividerDrawerItem(),
-                    new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_favorites)).withIcon(GoogleMaterial.Icon.gmd_star).withBadge(favoriteApps).withBadgeStyle(badgeStyle).withIdentifier(3),
-                    new DividerDrawerItem(),
-                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_buy)).withIcon(GoogleMaterial.Icon.gmd_shop).withBadge(context.getResources().getString(R.string.action_buy_description)).withSelectable(false).withIdentifier(5),
-                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(GoogleMaterial.Icon.gmd_settings).withSelectable(false).withIdentifier(6),
-                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false).withIdentifier(7));
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_apps)).withIcon(GoogleMaterial.Icon.gmd_phone_android).withBadge(apps).withBadgeStyle(badgeStyle).withIdentifier(1),
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_system_apps)).withIcon(GoogleMaterial.Icon.gmd_android).withBadge(systemApps).withBadgeStyle(badgeStyle).withIdentifier(2),
+                new DividerDrawerItem(),
+                new PrimaryDrawerItem().withName(context.getResources().getString(R.string.action_favorites)).withIcon(GoogleMaterial.Icon.gmd_star).withBadge(favoriteApps).withBadgeStyle(badgeStyle).withIdentifier(3),
+                new DividerDrawerItem(),
+                new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_buy)).withIcon(GoogleMaterial.Icon.gmd_shop).withBadge(context.getResources().getString(R.string.action_buy_description)).withSelectable(false).withIdentifier(5),
+                new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_settings)).withIcon(GoogleMaterial.Icon.gmd_settings).withSelectable(false).withIdentifier(6),
+                new SecondaryDrawerItem().withName(context.getResources().getString(R.string.action_about)).withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false).withIdentifier(7));
         }
 
         drawerBuilder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View view, int position, IDrawerItem iDrawerItem) {
                 switch (iDrawerItem.getIdentifier()) {
-                    case 1:
-                        recyclerView.setAdapter(appAdapter);
-                        break;
-                    case 2:
-                        recyclerView.setAdapter(appSystemAdapter);
-                        break;
-                    case 3:
-                        recyclerView.setAdapter(appFavoriteAdapter);
-                        break;
-                    case 4:
-                        recyclerView.setAdapter(appHiddenAdapter);
-                        break;
-                    case 5:
-                        UtilsDialog.showProFeatures(context);
-                        break;
-                    case 6:
-                        context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        break;
-                    case 7:
-                        context.startActivity(new Intent(context, AboutActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        break;
-                    default:
-                        break;
+                case 1:
+                    recyclerView.setAdapter(appAdapter);
+                    break;
+                case 2:
+                    recyclerView.setAdapter(appSystemAdapter);
+                    break;
+                case 3:
+                    recyclerView.setAdapter(appFavoriteAdapter);
+                    break;
+                case 4:
+                    recyclerView.setAdapter(appHiddenAdapter);
+                    break;
+                case 5:
+                    UtilsDialog.showProFeatures(context);
+                    break;
+                case 6:
+                    context.startActivity(new Intent(context, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
+                case 7:
+                    context.startActivity(new Intent(context, AboutActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
+                default:
+                    break;
                 }
 
                 return false;

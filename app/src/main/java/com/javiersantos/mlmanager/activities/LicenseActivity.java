@@ -12,10 +12,10 @@ public class LicenseActivity extends LibsActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setIntent(new LibsBuilder()
-                .withActivityTitle(getResources().getString(R.string.settings_license))
-                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                .withAutoDetect(true)
-                .intent(this));
+                  .withActivityTitle(getResources().getString(R.string.settings_license))
+                  .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                  .withAutoDetect(true)
+                  .intent(this));
 
         super.onCreate(savedInstanceState);
     }

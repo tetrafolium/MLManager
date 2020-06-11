@@ -45,14 +45,14 @@ public class UtilsRoot {
 
     public static boolean isRootedByExecutingCommand() {
         return canExecuteCommand("/system/xbin/which su")
-                || canExecuteCommand("/system/bin/which su")
-                || canExecuteCommand("which su");
+               || canExecuteCommand("/system/bin/which su")
+               || canExecuteCommand("which su");
     }
 
     public static boolean removeWithRootPermission(String directory) {
         boolean status = false;
         try {
-            String[] command = new String[]{"su", "-c", "rm -rf " + directory};
+            String[] command = new String[] {"su", "-c", "rm -rf " + directory};
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
             int i = process.exitValue();
@@ -71,9 +71,9 @@ public class UtilsRoot {
         try {
             String [] command;
             if (hidden) {
-                command = new String[]{"su", "-c", "pm unhide " + apk + "\n"};
+                command = new String[] {"su", "-c", "pm unhide " + apk + "\n"};
             } else {
-                command = new String[]{"su", "-c", "pm hide " + apk + "\n"};
+                command = new String[] {"su", "-c", "pm hide " + apk + "\n"};
             }
 
             Process process = Runtime.getRuntime().exec(command);
@@ -92,9 +92,9 @@ public class UtilsRoot {
     public static boolean uninstallWithRootPermission(String source) {
         boolean status = false;
         try {
-            String[] command_write = new String[]{"su", "-c", "mount -o rw,remount /system\n"};
-            String[] command_delete = new String[]{"su", "-c", "rm -r " + "/" + source + "\n"};
-            String[] command_read = new String[]{"su", "-c", "mount -o ro,remount /system\n"};
+            String[] command_write = new String[] {"su", "-c", "mount -o rw,remount /system\n"};
+            String[] command_delete = new String[] {"su", "-c", "rm -r " + "/" + source + "\n"};
+            String[] command_read = new String[] {"su", "-c", "mount -o ro,remount /system\n"};
 
             Process process = Runtime.getRuntime().exec(command_write);
             process.waitFor();
@@ -122,7 +122,7 @@ public class UtilsRoot {
     public static boolean rebootSystem() {
         boolean status = false;
         try {
-            String [] command = new String[]{"su", "-c", "reboot\n"};
+            String [] command = new String[] {"su", "-c", "reboot\n"};
 
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
