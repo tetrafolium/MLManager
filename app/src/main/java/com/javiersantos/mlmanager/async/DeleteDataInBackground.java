@@ -10,47 +10,47 @@ import com.javiersantos.mlmanager.utils.UtilsDialog;
 import com.javiersantos.mlmanager.utils.UtilsRoot;
 
 public class DeleteDataInBackground extends AsyncTask<Void, String, Boolean> {
-  private Context context;
-  private Activity activity;
-  private MaterialDialog dialog;
-  private String directory;
-  private String successDescription;
+private Context context;
+private Activity activity;
+private MaterialDialog dialog;
+private String directory;
+private String successDescription;
 
-  public DeleteDataInBackground(final Context context,
-                                final MaterialDialog dialog,
-                                final String directory,
-                                final String successDescription) {
-    this.context = context;
-    this.activity = (Activity)context;
-    this.dialog = dialog;
-    this.directory = directory;
-    this.successDescription = successDescription;
-  }
+public DeleteDataInBackground(final Context context,
+                              final MaterialDialog dialog,
+                              final String directory,
+                              final String successDescription) {
+	this.context = context;
+	this.activity = (Activity)context;
+	this.dialog = dialog;
+	this.directory = directory;
+	this.successDescription = successDescription;
+}
 
-  @Override
-  protected Boolean doInBackground(final Void... voids) {
-    Boolean status = false;
+@Override
+protected Boolean doInBackground(final Void... voids) {
+	Boolean status = false;
 
-    if (UtilsApp.checkPermissions(activity)) {
-      status = UtilsRoot.removeWithRootPermission(directory);
-    }
+	if (UtilsApp.checkPermissions(activity)) {
+		status = UtilsRoot.removeWithRootPermission(directory);
+	}
 
-    return status;
-  }
+	return status;
+}
 
-  @Override
-  protected void onPostExecute(final Boolean status) {
-    super.onPostExecute(status);
-    dialog.dismiss();
-    if (status) {
-      UtilsDialog.showSnackbar(activity, successDescription, null, null, 2)
-          .show();
-    } else {
-      UtilsDialog.showTitleContent(
-          context,
-          context.getResources().getString(R.string.dialog_root_required),
-          context.getResources().getString(
-              R.string.dialog_root_required_description));
-    }
-  }
+@Override
+protected void onPostExecute(final Boolean status) {
+	super.onPostExecute(status);
+	dialog.dismiss();
+	if (status) {
+		UtilsDialog.showSnackbar(activity, successDescription, null, null, 2)
+		.show();
+	} else {
+		UtilsDialog.showTitleContent(
+			context,
+			context.getResources().getString(R.string.dialog_root_required),
+			context.getResources().getString(
+				R.string.dialog_root_required_description));
+	}
+}
 }

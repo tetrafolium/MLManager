@@ -13,63 +13,63 @@ import com.javiersantos.mlmanager.utils.UtilsDialog;
 import com.javiersantos.mlmanager.utils.UtilsRoot;
 
 public class UninstallInBackground extends AsyncTask<Void, String, Boolean> {
-  private Context context;
-  private Activity activity;
-  private MaterialDialog dialog;
-  private AppInfo appInfo;
+private Context context;
+private Activity activity;
+private MaterialDialog dialog;
+private AppInfo appInfo;
 
-  public UninstallInBackground(final Context context,
-                               final MaterialDialog dialog,
-                               final AppInfo appInfo) {
-    this.context = context;
-    this.activity = (Activity)context;
-    this.dialog = dialog;
-    this.appInfo = appInfo;
-  }
+public UninstallInBackground(final Context context,
+                             final MaterialDialog dialog,
+                             final AppInfo appInfo) {
+	this.context = context;
+	this.activity = (Activity)context;
+	this.dialog = dialog;
+	this.appInfo = appInfo;
+}
 
-  @Override
-  protected Boolean doInBackground(final Void... voids) {
-    Boolean status = false;
+@Override
+protected Boolean doInBackground(final Void... voids) {
+	Boolean status = false;
 
-    if (UtilsApp.checkPermissions(activity)) {
-      status = UtilsRoot.uninstallWithRootPermission(appInfo.getSource());
-    }
+	if (UtilsApp.checkPermissions(activity)) {
+		status = UtilsRoot.uninstallWithRootPermission(appInfo.getSource());
+	}
 
-    return status;
-  }
+	return status;
+}
 
-  @Override
-  protected void onPostExecute(final Boolean status) {
-    super.onPostExecute(status);
-    dialog.dismiss();
-    if (status) {
-      MaterialDialog.Builder materialDialog =
-          UtilsDialog.showUninstalled(context, appInfo);
-      materialDialog.callback(new MaterialDialog.ButtonCallback() {
-        @Override
-        public void onPositive(final MaterialDialog dialog) {
-          UtilsRoot.rebootSystem();
-          dialog.dismiss();
-        }
-      });
-      materialDialog.callback(new MaterialDialog.ButtonCallback() {
-        @Override
-        public void onNegative(final MaterialDialog dialog) {
-          dialog.dismiss();
-          Intent intent = new Intent(context, MainActivity.class);
-          intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                          Intent.FLAG_ACTIVITY_CLEAR_TASK);
-          activity.finish();
-          context.startActivity(intent);
-        }
-      });
-      materialDialog.show();
-    } else {
-      UtilsDialog.showTitleContent(
-          context,
-          context.getResources().getString(R.string.dialog_root_required),
-          context.getResources().getString(
-              R.string.dialog_root_required_description));
-    }
-  }
+@Override
+protected void onPostExecute(final Boolean status) {
+	super.onPostExecute(status);
+	dialog.dismiss();
+	if (status) {
+		MaterialDialog.Builder materialDialog =
+			UtilsDialog.showUninstalled(context, appInfo);
+		materialDialog.callback(new MaterialDialog.ButtonCallback() {
+				@Override
+				public void onPositive(final MaterialDialog dialog) {
+				        UtilsRoot.rebootSystem();
+				        dialog.dismiss();
+				}
+			});
+		materialDialog.callback(new MaterialDialog.ButtonCallback() {
+				@Override
+				public void onNegative(final MaterialDialog dialog) {
+				        dialog.dismiss();
+				        Intent intent = new Intent(context, MainActivity.class);
+				        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+				                        Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				        activity.finish();
+				        context.startActivity(intent);
+				}
+			});
+		materialDialog.show();
+	} else {
+		UtilsDialog.showTitleContent(
+			context,
+			context.getResources().getString(R.string.dialog_root_required),
+			context.getResources().getString(
+				R.string.dialog_root_required_description));
+	}
+}
 }
