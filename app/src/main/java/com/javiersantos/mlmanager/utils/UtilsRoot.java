@@ -49,7 +49,7 @@ public class UtilsRoot {
                || canExecuteCommand("which su");
     }
 
-    public static boolean removeWithRootPermission(String directory) {
+    public static boolean removeWithRootPermission(final String directory) {
         boolean status = false;
         try {
             String[] command = new String[] {"su", "-c", "rm -rf " + directory};
@@ -66,7 +66,7 @@ public class UtilsRoot {
         return status;
     }
 
-    public static boolean hideWithRootPermission(String apk, Boolean hidden) {
+    public static boolean hideWithRootPermission(final String apk, final Boolean hidden) {
         boolean status = false;
         try {
             String [] command;
@@ -89,7 +89,7 @@ public class UtilsRoot {
         return status;
     }
 
-    public static boolean uninstallWithRootPermission(String source) {
+    public static boolean uninstallWithRootPermission(final String source) {
         boolean status = false;
         try {
             String[] command_write = new String[] {"su", "-c", "mount -o rw,remount /system\n"};
@@ -137,7 +137,7 @@ public class UtilsRoot {
         return status;
     }
 
-    public static long getFolderSizeInMB(String directory) {
+    public static long getFolderSizeInMB(final String directory) {
         File f = new File(directory);
         long size = 0;
         if (f.isDirectory()) {
@@ -145,13 +145,13 @@ public class UtilsRoot {
                 size += getFolderSizeInMB(file.getAbsolutePath());
             }
         } else {
-            size = f.length()/1024/2024;
+            size = f.length() / 1024 / 2024;
         }
 
         return size;
     }
 
-    private static boolean canExecuteCommand(String command) {
+    private static boolean canExecuteCommand(final String command) {
         boolean isExecuted;
         try {
             Runtime.getRuntime().exec(command);

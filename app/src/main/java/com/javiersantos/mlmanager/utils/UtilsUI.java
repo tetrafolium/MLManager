@@ -29,7 +29,7 @@ import java.util.Calendar;
 
 public class UtilsUI {
 
-    public static int darker (int color, double factor) {
+    public static int darker(final int color, final double factor) {
         int a = Color.alpha(color);
         int r = Color.red(color);
         int g = Color.green(color);
@@ -38,7 +38,7 @@ public class UtilsUI {
         return Color.argb(a, Math.max((int) (r * factor), 0), Math.max((int) (g * factor), 0), Math.max((int) (b * factor), 0));
     }
 
-    public static Drawer setNavigationDrawer (Activity activity, final Context context, Toolbar toolbar, final AppAdapter appAdapter, final AppAdapter appSystemAdapter, final AppAdapter appFavoriteAdapter, final AppAdapter appHiddenAdapter, final RecyclerView recyclerView) {
+    public static Drawer setNavigationDrawer(final Activity activity, final Context context, final Toolbar toolbar, final AppAdapter appAdapter, final AppAdapter appSystemAdapter, final AppAdapter appFavoriteAdapter, final AppAdapter appHiddenAdapter, final RecyclerView recyclerView) {
         final String loadingLabel = "...";
         int header;
         AppPreferences appPreferences = MLManagerApplication.getAppPreferences();
@@ -110,7 +110,7 @@ public class UtilsUI {
 
         drawerBuilder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
-            public boolean onItemClick(View view, int position, IDrawerItem iDrawerItem) {
+            public boolean onItemClick(final View view, final int position, final IDrawerItem iDrawerItem) {
                 switch (iDrawerItem.getIdentifier()) {
                 case 1:
                     recyclerView.setAdapter(appAdapter);

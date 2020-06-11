@@ -24,7 +24,7 @@ public class AboutActivity extends AppCompatActivity {
     private Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         this.appPreferences = MLManagerApplication.getAppPreferences();
@@ -41,7 +41,7 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.action_about);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 onBackPressed();
             }
         });
@@ -69,25 +69,25 @@ public class AboutActivity extends AppCompatActivity {
         appNameVersion.setText(getResources().getString(R.string.app_name) + " " + UtilsApp.getAppVersionName(getApplicationContext()) + " \"" + getResources().getString(R.string.app_codename) + "\"");
         about_1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.goToGooglePlus(context, "+JavierSantos");
             }
         });
         about_2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.goToGooglePlus(context, "+javitoro95");
             }
         });
         about_googleplay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.goToGooglePlay(context, context.getPackageName());
             }
         });
         about_googleplus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.goToGooglePlus(context, "communities/111960842500303983487");
             }
         });

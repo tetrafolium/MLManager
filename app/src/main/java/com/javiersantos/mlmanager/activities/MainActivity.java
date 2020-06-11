@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private static LinearLayout noResults;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.appPreferences = MLManagerApplication.getAppPreferences();
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(final Void... params) {
             final PackageManager packageManager = getPackageManager();
             List<PackageInfo> packages = packageManager.getInstalledPackages(PackageManager.GET_META_DATA);
             Set<String> hiddenApps = appPreferences.getHiddenApps();
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 // Comparator by Name (default)
                 Collections.sort(packages, new Comparator<PackageInfo>() {
                     @Override
-                    public int compare(PackageInfo p1, PackageInfo p2) {
+                    public int compare(final PackageInfo p1, final PackageInfo p2) {
                         return packageManager.getApplicationLabel(p1.applicationInfo).toString().toLowerCase().compareTo(packageManager.getApplicationLabel(p2.applicationInfo).toString().toLowerCase());
                     }
                 });
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 // Comparator by Size
                 Collections.sort(packages, new Comparator<PackageInfo>() {
                     @Override
-                    public int compare(PackageInfo p1, PackageInfo p2) {
+                    public int compare(final PackageInfo p1, final PackageInfo p2) {
                         Long size1 = new File(p1.applicationInfo.sourceDir).length();
                         Long size2 = new File(p2.applicationInfo.sourceDir).length();
                         return size2.compareTo(size1);
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 // Comparator by Installation Date (default)
                 Collections.sort(packages, new Comparator<PackageInfo>() {
                     @Override
-                    public int compare(PackageInfo p1, PackageInfo p2) {
+                    public int compare(final PackageInfo p1, final PackageInfo p2) {
                         return Long.toString(p2.firstInstallTime).compareTo(Long.toString(p1.firstInstallTime));
                     }
                 });
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 // Comparator by Last Update
                 Collections.sort(packages, new Comparator<PackageInfo>() {
                     @Override
-                    public int compare(PackageInfo p1, PackageInfo p2) {
+                    public int compare(final PackageInfo p1, final PackageInfo p2) {
                         return Long.toString(p2.lastUpdateTime).compareTo(Long.toString(p1.lastUpdateTime));
                     }
                 });
@@ -237,13 +237,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
 
         @Override
-        protected void onProgressUpdate(String... progress) {
+        protected void onProgressUpdate(final String... progress) {
             super.onProgressUpdate(progress);
             progressWheel.setProgress(Float.parseFloat(progress[0]));
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(final Void aVoid) {
             super.onPostExecute(aVoid);
 
             appAdapter = new AppAdapter(appList, context);
@@ -287,18 +287,18 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
     }
 
-    private void checkAndAddPermissions(Activity activity) {
+    private void checkAndAddPermissions(final Activity activity) {
         UtilsApp.checkPermissions(activity);
     }
 
     private void setAppDir() {
         File appDir = UtilsApp.getAppFolder();
-        if(!appDir.exists()) {
+        if (!appDir.exists()) {
             appDir.mkdir();
         }
     }
 
-    private List<AppInfo> getFavoriteList(List<AppInfo> appList, List<AppInfo> appSystemList) {
+    private List<AppInfo> getFavoriteList(final List<AppInfo> appList, final List<AppInfo> appSystemList) {
         List<AppInfo> res = new ArrayList<>();
 
         for (AppInfo app : appList) {
@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onQueryTextChange(String search) {
+    public boolean onQueryTextChange(final String search) {
         if (search.isEmpty()) {
             ((AppAdapter) recyclerView.getAdapter()).getFilter().filter("");
         } else {
@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return false;
     }
 
-    public static void setResultsMessage(Boolean result) {
+    public static void setResultsMessage(final Boolean result) {
         if (result) {
             noResults.setVisibility(View.VISIBLE);
             fastScroller.setVisibility(View.GONE);
@@ -337,12 +337,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextSubmit(final String query) {
         return false;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
@@ -357,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
         switch (requestCode) {
         case MY_PERMISSIONS_REQUEST_WRITE_READ: {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {

@@ -36,7 +36,7 @@ public class MLManagerApplication extends Application {
         return isPro;
     }
 
-    public static void setPro(Boolean res) {
+    public static void setPro(final Boolean res) {
         isPro = res;
     }
 

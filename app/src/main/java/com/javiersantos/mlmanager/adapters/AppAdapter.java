@@ -41,7 +41,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     private List<AppInfo> appListSearch;
     private Context context;
 
-    public AppAdapter(List<AppInfo> appList, Context context) {
+    public AppAdapter(final List<AppInfo> appList, final Context context) {
         this.appList = appList;
         this.context = context;
         this.appPreferences = MLManagerApplication.getAppPreferences();
@@ -58,7 +58,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     }
 
     @Override
-    public void onBindViewHolder(AppViewHolder appViewHolder, int i) {
+    public void onBindViewHolder(final AppViewHolder appViewHolder, final int i) {
         AppInfo appInfo = appList.get(i);
         appViewHolder.vName.setText(appInfo.getName());
         appViewHolder.vApk.setText(appInfo.getAPK());
@@ -68,7 +68,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
 
     }
 
-    private void setButtonEvents(AppViewHolder appViewHolder, final AppInfo appInfo) {
+    private void setButtonEvents(final AppViewHolder appViewHolder, final AppInfo appInfo) {
         ButtonFlat appExtract = appViewHolder.vExtract;
         ButtonFlat appShare = appViewHolder.vShare;
         final ImageView appIcon = appViewHolder.vIcon;
@@ -79,16 +79,16 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
 
         appExtract.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 MaterialDialog dialog = UtilsDialog.showTitleContentWithProgress(context
-                                        , String.format(context.getResources().getString(R.string.dialog_saving), appInfo.getName())
-                                        , context.getResources().getString(R.string.dialog_saving_description));
+, String.format(context.getResources().getString(R.string.dialog_saving), appInfo.getName())
+, context.getResources().getString(R.string.dialog_saving_description));
                 new ExtractFileInBackground(context, dialog, appInfo).execute();
             }
         });
         appShare.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 UtilsApp.copyFile(appInfo);
                 Intent shareIntent = UtilsApp.getShareIntent(UtilsApp.getOutputFilename(appInfo));
                 context.startActivity(Intent.createChooser(shareIntent, String.format(context.getResources().getString(R.string.send_to), appInfo.getName())));
@@ -97,7 +97,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Activity activity = (Activity) context;
 
                 Intent intent = new Intent(context, AppActivity.class);
@@ -127,7 +127,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     public Filter getFilter() {
         return new Filter() {
             @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
+            protected FilterResults performFiltering(final CharSequence charSequence) {
                 final FilterResults oReturn = new FilterResults();
                 final List<AppInfo> results = new ArrayList<>();
                 if (appListSearch == null) {
@@ -148,7 +148,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
             }
 
             @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            protected void publishResults(final CharSequence charSequence, final FilterResults filterResults) {
                 if (filterResults.count > 0) {
                     MainActivity.setResultsMessage(false);
                 } else {
@@ -161,7 +161,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
     }
 
     @Override
-    public AppViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public AppViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
         View appAdapterView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_layout, viewGroup, false);
         return new AppViewHolder(appAdapterView);
     }
@@ -174,7 +174,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.AppViewHolder> i
         protected ButtonFlat vShare;
         protected CardView vCard;
 
-        public AppViewHolder(View v) {
+        public AppViewHolder(final View v) {
             super(v);
             vName = (TextView) v.findViewById(R.id.txtName);
             vApk = (TextView) v.findViewById(R.id.txtApk);

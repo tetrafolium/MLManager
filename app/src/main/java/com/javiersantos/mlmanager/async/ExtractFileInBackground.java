@@ -17,7 +17,7 @@ public class ExtractFileInBackground extends AsyncTask<Void, String, Boolean> {
     private MaterialDialog dialog;
     private AppInfo appInfo;
 
-    public ExtractFileInBackground(Context context, MaterialDialog dialog, AppInfo appInfo) {
+    public ExtractFileInBackground(final Context context, final MaterialDialog dialog, final AppInfo appInfo) {
         this.activity = (Activity) context;
         this.context = context;
         this.dialog = dialog;
@@ -25,7 +25,7 @@ public class ExtractFileInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... voids) {
+    protected Boolean doInBackground(final Void... voids) {
         Boolean status = false;
 
         if (UtilsApp.checkPermissions(activity)) {
@@ -40,7 +40,7 @@ public class ExtractFileInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean status) {
+    protected void onPostExecute(final Boolean status) {
         super.onPostExecute(status);
         dialog.dismiss();
         if (status) {

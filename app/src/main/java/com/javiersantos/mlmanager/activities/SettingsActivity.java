@@ -40,7 +40,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     private DirectoryChooserFragment chooserDialog;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         this.context = this;
@@ -68,7 +68,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         prefVersion.setTitle(getResources().getString(R.string.app_name) + " v" + versionName + " (" + versionCode + ")");
         prefVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 startActivity(new Intent(context, AboutActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
                 return false;
@@ -77,7 +77,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
         prefLicense.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 startActivity(new Intent(context, LicenseActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.fade_back);
                 return false;
@@ -96,7 +96,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         // prefDeleteAll
         prefDeleteAll.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 prefDeleteAll.setSummary(R.string.deleting);
                 prefDeleteAll.setEnabled(false);
                 Boolean deleteAll = UtilsApp.deleteAppFiles();
@@ -113,7 +113,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         // prefDefaultValues
         prefDefaultValues.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 appPreferences.setPrimaryColorPref(getResources().getColor(R.color.primary));
                 appPreferences.setFABColorPref(getResources().getColor(R.color.fab));
                 return true;
@@ -123,7 +123,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         // prefCustomPath
         prefCustomPath.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 final DirectoryChooserConfig chooserConfig = DirectoryChooserConfig.builder()
                         .newDirectoryName("ML Manager APKs")
                         .allowReadOnlyDirectory(false)
@@ -141,14 +141,14 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(final int layoutResID) {
         ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.activity_settings, new LinearLayout(this), false);
         toolbar = (Toolbar) contentView.findViewById(R.id.toolbar);
         //TODO Toolbar should load the default style in XML (white title and back arrow), but doesn't happen
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 onBackPressed();
             }
         });
@@ -181,12 +181,12 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     private void setCustomFilenameSummary() {
-        int filenameValue = Integer.valueOf(appPreferences.getCustomFilename())-1;
+        int filenameValue = Integer.valueOf(appPreferences.getCustomFilename()) - 1;
         prefCustomFilename.setSummary(getResources().getStringArray(R.array.filenameEntries)[filenameValue]);
     }
 
     private void setSortModeSummary() {
-        int sortValue = Integer.valueOf(appPreferences.getSortMode())-1;
+        int sortValue = Integer.valueOf(appPreferences.getSortMode()) - 1;
         prefSortMode.setSummary(getResources().getStringArray(R.array.sortEntries)[sortValue]);
     }
 
@@ -200,7 +200,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
         Preference pref = findPreference(key);
 
         if (pref == prefCustomFilename) {
@@ -213,7 +213,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     @Override
-    public void onSelectDirectory(@NonNull String path) {
+    public void onSelectDirectory(final @NonNull String path) {
         appPreferences.setCustomPath(path);
         setCustomPathSummary();
         chooserDialog.dismiss();

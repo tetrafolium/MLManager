@@ -49,7 +49,7 @@ public class UtilsApp {
         return new File(appPreferences.getCustomPath());
     }
 
-    public static Boolean copyFile(AppInfo appInfo) {
+    public static Boolean copyFile(final AppInfo appInfo) {
         Boolean res = false;
 
         File initialFile = new File(appInfo.getSource());
@@ -70,7 +70,7 @@ public class UtilsApp {
      * @param appInfo AppInfo
      * @return String with the output name
      */
-    public static String getAPKFilename(AppInfo appInfo) {
+    public static String getAPKFilename(final AppInfo appInfo) {
         AppPreferences appPreferences = MLManagerApplication.getAppPreferences();
         String res;
 
@@ -97,7 +97,7 @@ public class UtilsApp {
      * @param appInfo AppInfo
      * @return File with the path and output name
      */
-    public static File getOutputFilename(AppInfo appInfo) {
+    public static File getOutputFilename(final AppInfo appInfo) {
         return new File(getAppFolder().getPath() + "/" + getAPKFilename(appInfo) + ".apk");
     }
 
@@ -125,7 +125,7 @@ public class UtilsApp {
      * @param context Context
      * @param id PackageName on Google Play
      */
-    public static void goToGooglePlay(Context context, String id) {
+    public static void goToGooglePlay(final Context context, final String id) {
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + id)));
         } catch (ActivityNotFoundException e) {
@@ -138,7 +138,7 @@ public class UtilsApp {
      * @param context Context
      * @param id Name on Google Play
      */
-    public static void goToGooglePlus(Context context, String id) {
+    public static void goToGooglePlus(final Context context, final String id) {
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/" + id)));
     }
 
@@ -147,7 +147,7 @@ public class UtilsApp {
      * @param context Context
      * @return String with the app version
      */
-    public static String getAppVersionName(Context context) {
+    public static String getAppVersionName(final Context context) {
         String res = "0.0.0.0";
         try {
             res = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
@@ -163,7 +163,7 @@ public class UtilsApp {
      * @param context Context
      * @return int with the app version code
      */
-    public static int getAppVersionCode(Context context) {
+    public static int getAppVersionCode(final Context context) {
         int res = 0;
         try {
             res = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
@@ -174,7 +174,7 @@ public class UtilsApp {
         return res;
     }
 
-    public static Intent getShareIntent(File file) {
+    public static Intent getShareIntent(final File file) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -190,7 +190,7 @@ public class UtilsApp {
      * @param appFavorites Set with apps
      * @return true if the app is marked as favorite, false otherwise
      */
-    public static Boolean isAppFavorite(String apk, Set<String> appFavorites) {
+    public static Boolean isAppFavorite(final String apk, final Set<String> appFavorites) {
         Boolean res = false;
         if (appFavorites.contains(apk)) {
             res = true;
@@ -205,7 +205,7 @@ public class UtilsApp {
      * @param menuItem Item of the ActionBar
      * @param isFavorite true if the app is favorite, false otherwise
      */
-    public static void setAppFavorite(Context context, MenuItem menuItem, Boolean isFavorite) {
+    public static void setAppFavorite(final Context context, final MenuItem menuItem, final Boolean isFavorite) {
         if (isFavorite) {
             menuItem.setIcon(ContextCompat.getDrawable(context, R.drawable.ic_star_white));
         } else {
@@ -219,7 +219,7 @@ public class UtilsApp {
      * @param appHidden Set with apps
      * @return true if the app is hidden, false otherwise
      */
-    public static Boolean isAppHidden(AppInfo appInfo, Set<String> appHidden) {
+    public static Boolean isAppHidden(final AppInfo appInfo, final Set<String> appHidden) {
         Boolean res = false;
         if (appHidden.contains(appInfo.toString())) {
             res = true;
@@ -234,7 +234,7 @@ public class UtilsApp {
      * @param fabHide FAB button to change
      * @param isHidden true if the app is hidden, false otherwise
      */
-    public static void setAppHidden(Context context, FloatingActionButton fabHide, Boolean isHidden) {
+    public static void setAppHidden(final Context context, final FloatingActionButton fabHide, final Boolean isHidden) {
         if (isHidden) {
             fabHide.setTitle(context.getResources().getString(R.string.action_unhide));
             fabHide.setIcon(R.drawable.ic_visibility_white);
@@ -250,7 +250,7 @@ public class UtilsApp {
      * @param appInfo App to save icon
      * @return true if the icon has been saved, false otherwise
      */
-    public static Boolean saveIconToCache(Context context, AppInfo appInfo) {
+    public static Boolean saveIconToCache(final Context context, final AppInfo appInfo) {
         Boolean res = false;
 
         try {
@@ -276,7 +276,7 @@ public class UtilsApp {
      * @param appInfo App to remove icon
      * @return true if the icon has been removed, false otherwise
      */
-    public static Boolean removeIconFromCache(Context context, AppInfo appInfo) {
+    public static Boolean removeIconFromCache(final Context context, final AppInfo appInfo) {
         File file = new File(context.getCacheDir(), appInfo.getAPK());
         return file.delete();
     }
@@ -287,7 +287,7 @@ public class UtilsApp {
      * @param appInfo App to get icon
      * @return Drawable with the app icon
      */
-    public static Drawable getIconFromCache(Context context, AppInfo appInfo) {
+    public static Drawable getIconFromCache(final Context context, final AppInfo appInfo) {
         Drawable res;
 
         try {
@@ -302,7 +302,7 @@ public class UtilsApp {
         return res;
     }
 
-    public static Boolean extractMLManagerPro(Context context, AppInfo appInfo) {
+    public static Boolean extractMLManagerPro(final Context context, final AppInfo appInfo) {
         Boolean res = false;
         File finalFile = new File(getAppFolder().getPath(), getAPKFilename(appInfo) + ".png");
 
@@ -322,7 +322,7 @@ public class UtilsApp {
         return res;
     }
 
-    public static Boolean checkPermissions(Activity activity) {
+    public static Boolean checkPermissions(final Activity activity) {
         Boolean res = false;
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             activity.requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_READ);

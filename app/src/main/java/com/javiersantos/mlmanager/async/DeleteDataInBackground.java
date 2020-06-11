@@ -17,7 +17,7 @@ public class DeleteDataInBackground extends AsyncTask<Void, String, Boolean> {
     private String directory;
     private String successDescription;
 
-    public DeleteDataInBackground(Context context, MaterialDialog dialog, String directory, String successDescription) {
+    public DeleteDataInBackground(final Context context, final MaterialDialog dialog, final String directory, final String successDescription) {
         this.context = context;
         this.activity = (Activity) context;
         this.dialog = dialog;
@@ -26,7 +26,7 @@ public class DeleteDataInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... voids) {
+    protected Boolean doInBackground(final Void... voids) {
         Boolean status = false;
 
         if (UtilsApp.checkPermissions(activity)) {
@@ -37,7 +37,7 @@ public class DeleteDataInBackground extends AsyncTask<Void, String, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean status) {
+    protected void onPostExecute(final Boolean status) {
         super.onPostExecute(status);
         dialog.dismiss();
         if (status) {
